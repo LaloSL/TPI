@@ -1,3 +1,6 @@
+//Dependecias
+// npm install express sequelize mysql2 multer express-session pug bcrypt dotenv sharp
+
 require('dotenv').config();
 
 const express = require('express');
@@ -6,41 +9,40 @@ const session = require('express-session');
 
 const app = express();
 
+const sequelize = require('./models/db');
 
-// CONFIGURACIÓN
+
+// Middleware
+const { getCurrentUser } = require('./middleware/auth');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(getCurrentUser);
+
 
 const PORT = process.env.PORT || 3000;
 
 
-// PUG
+// Rutas - eje principal
 
+const indexRoutes = require('./routes/eje/index');
+const usuariosRoutes = require('./routes/eje/usuarios');
+const administradorRoutes = require('./routes/eje/admin');
+
+
+// Configuración de Pug
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 
-// MIDDLEWARES
-
-app.use(express.json());
-
-app.use(express.urlencoded({
-  extended: true
-}));
-
-app.use(express.static(
-  path.join(__dirname, 'public')
-));
+// Configuración de sesión
 
 app.use(
   session({
-    secret:
-      process.env.SESSION_SECRET ||
-      'fotaza-secret',
-
+    secret: process.env.SESSION_SECRET,
     resave: false,
-
     saveUninitialized: false,
-
     cookie: {
       secure: false,
       maxAge: 24 * 60 * 60 * 1000
@@ -49,28 +51,22 @@ app.use(
 );
 
 
-// RUTA PRINCIPAL
+// Montaje de rutas
 
-app.get('/', (req, res) => {
-
-  res.send(
-    'Fotaza 2 funcionando correctamente'
-  );
-
-});
+app.use('/', indexRoutes);
+app.use('/usuarios', usuariosRoutes);
+app.use('/administrador', administradorRoutes);
 
 
+sequelize
+  .sync()
+  .then(() => {
+    console.log('Modelos sincronizados correctamente');
 
-// INICIO SERVIDOR
-
-app.listen(PORT, () => {
-
-  console.log(
-    `Servidor iniciado en http://localhost:${PORT}`
-  );
-
-});
-
-
-//Dependecias
-// npm install express sequelize mysql2 multer express-session pug bcrypt dotenv sharp
+    app.listen(PORT, () => {
+      console.log(`Servidor iniciado en http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('Error al sincronizar modelos:', err);
+  });
