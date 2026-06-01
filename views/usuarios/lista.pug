@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  h1 Usuarios
+  a(href='/usuarios/nuevo') Nuevo usuario
+
+  table
+    thead
+      tr
+        th Nombre
+        th Email
+        th DNI
+        th Fecha registro
+
+    tbody
+      each usuario in usuarios
+        tr
+          td #{usuario.nombre}
+          td #{usuario.email}
+          td #{usuario.dni}
+          td #{usuario.fecha_registro.toLocaleDateString()}
+
+  if error
+    p.error #{error}

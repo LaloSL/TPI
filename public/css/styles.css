@@ -1,0 +1,113 @@
+
+  /* Layout General*/
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+div.items {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+div.login {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.contenedor {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+   /*Botones*/
+
+
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+
+   /*Menú Notificaciones*/
+
+
+.menu-notificaciones {
+    position: relative;
+    display: inline-block;
+}
+
+.boton-notificaciones {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+}
+
+.opciones-notificaciones {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #333;
+    min-width: 180px;
+    z-index: 10;
+}
+
+.opciones-notificaciones a {
+    display: block;
+    padding: 8px 10px;
+    color: blue;
+}
+
+.opciones-notificaciones a:hover {
+    background-color: #eee;
+}
+
+.menu-notificaciones:hover .opciones-notificaciones {
+    display: block;
+}
+
+
+   /*Tablas*/
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+}
+
+th,
+td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+
+    /*Mensajes*/
+
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
