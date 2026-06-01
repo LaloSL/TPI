@@ -29,6 +29,13 @@ const indexRoutes = require('./routes/eje/index');
 const usuariosRoutes = require('./routes/eje/usuarios');
 const administradorRoutes = require('./routes/eje/admin');
 
+// Rutas - publicaciones
+
+const subirRoutes = require('./routes/publicaciones/subirRoutes');
+const publicacionesRoutes = require('./routes/publicaciones/publicacionesRoutes');
+const etiquetasRoutes = require('./routes/publicaciones/etiquetas');
+const publicarEtiquetasRoutes = require('./routes/publicaciones/publicarEtiquetas');
+
 
 // Configuración de Pug
 
@@ -56,6 +63,13 @@ app.use(
 app.use('/', indexRoutes);
 app.use('/usuarios', usuariosRoutes);
 app.use('/administrador', administradorRoutes);
+
+// Montaje rutas - publicaciones
+
+app.use('/subir', subirRoutes);
+app.use('/publicaciones', publicacionesRoutes);
+app.use('/etiquetas', etiquetasRoutes);
+app.use('/publicarEtiquetas', publicarEtiquetasRoutes);
 
 
 sequelize
