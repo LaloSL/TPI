@@ -282,3 +282,128 @@ small {
 .text-muted {
     color: #777;
 }
+
+/* denuncia publicacion*/
+
+.denuncia-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.denuncia-card {
+    width: 100%;
+    max-width: 700px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.1);
+}
+
+.denuncia-card h1 {
+    margin-bottom: 20px;
+}
+
+.denuncia-card h3 {
+    margin-bottom: 15px;
+}
+
+.acciones-denuncia {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-danger:hover,
+.btn-secondary:hover {
+    opacity: 0.9;
+}
+
+/* comentarios recibidos */
+
+.comentarios-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.comentarios-card {
+    width: 100%;
+    max-width: 800px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.1);
+}
+
+.comentarios-card h1 {
+    margin-bottom: 25px;
+}
+
+.comentario-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+}
+
+.comentario-item p {
+    margin: 8px 0;
+}
+
+.sin-comentarios {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+}
+
+/* denuncia de comentario */
+
+.denuncias-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.denuncias-card {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.1);
+}
+
+.denuncias-card h1 {
+    margin-bottom: 25px;
+}
+
+.denuncia-item {
+    border: 1px solid #ddd;
+    border-left: 5px solid #dc3545;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+}
+
+.denuncia-item p {
+    margin: 8px 0;
+}
+
+.sin-denuncias {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+}

@@ -20,7 +20,7 @@ async function formulario(req, res) {
       return res.status(404).send('Publicación no encontrada');
     }
 
-    res.render('denuncia', {
+    res.render('comentarios/denuncia', {
       title: 'Denunciar publicación',
       publicacion
     });
@@ -68,7 +68,7 @@ async function guardar(req, res) {
 
     if (!motivo || !descripcion) {
 
-      return res.render('denuncia', {
+      return res.render('comentarios/denuncia', {
         title: 'Denunciar publicación',
         publicacion,
         error:
