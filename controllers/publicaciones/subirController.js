@@ -10,14 +10,14 @@ const PublicacionEtiqueta = require('../models/PublicacionEtiqueta');
 
 async function formulario(req, res) {
   try {
-    res.render('subir', {
+    res.render('publicaciones/subir', {
       title: 'Subir publicación'
     });
 
   } catch (error) {
     console.error('Error al cargar formulario:', error);
 
-    res.status(500).render('subir', {
+    res.status(500).render('publicaciones/subir', {
       title: 'Subir publicación',
       error: 'Error al cargar el formulario'
     });
@@ -41,7 +41,7 @@ async function guardar(req, res) {
 
     if (!descripcion) {
 
-      return res.status(400).render('subir', {
+      return res.status(400).render('publicaciones/subir', {
         title: 'Subir publicación',
         error: 'La descripción es obligatoria'
       });
@@ -49,7 +49,7 @@ async function guardar(req, res) {
 
     if (!etiqueta || etiqueta.trim() === '') {
 
-      return res.status(400).render('subir', {
+      return res.status(400).render('publicaciones/subir', {
         title: 'Subir publicación',
         error: 'La etiqueta es obligatoria'
       });
@@ -57,7 +57,7 @@ async function guardar(req, res) {
 
     if (!req.files || req.files.length === 0) {
 
-      return res.status(400).render('subir', {
+      return res.status(400).render('publicaciones/subir', {
         title: 'Subir publicación',
         error: 'Debes subir al menos una imagen o video'
       });
@@ -65,7 +65,7 @@ async function guardar(req, res) {
 
     if (!req.session.userId) {
 
-      return res.status(401).render('subir', {
+      return res.status(401).render('publicaciones/subir', {
         title: 'Subir publicación',
         error: 'Debes iniciar sesión'
       });

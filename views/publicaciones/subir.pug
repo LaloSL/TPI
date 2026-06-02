@@ -1,0 +1,58 @@
+extends layout.pug
+
+block content
+
+.subir-container
+
+
+.subir-card
+
+  h1 Nueva publicación
+
+  p.subir-subtitulo
+    Compartí tus mejores fotografías y videos con la comunidad.
+
+  if error
+    .error-message
+      p= error
+
+  form(action="/subir", method="POST", enctype="multipart/form-data")
+
+    .form-group
+      label(for="imagenes")
+        | Imágenes o videos
+
+      input#imagenes(
+        type="file"
+        name="imagenes"
+        accept="image/,video/"
+        multiple
+        required
+      )
+
+    .form-group
+      label(for="descripcion")
+        | Descripción
+
+      textarea#descripcion(
+        name="descripcion"
+        rows="4"
+        placeholder="Contanos sobre esta publicación..."
+        required
+      )
+
+    .form-group
+      label(for="etiqueta")
+        | Etiqueta
+
+      input#etiqueta(
+        type="text"
+        name="etiqueta"
+        placeholder="Ej: paisaje, naturaleza, atardecer"
+        required
+      )
+
+    button.btn-publicar(type="submit")
+      | Publicar
+
+ subir.pug
