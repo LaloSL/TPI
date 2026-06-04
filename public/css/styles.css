@@ -504,3 +504,49 @@ small {
 .btn-modificar:hover {
     opacity: 0.9;
 }
+
+/*valoraciones*/
+.valoraciones-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.valoraciones-card {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.1);
+}
+
+.valoraciones-card h1 {
+    margin-bottom: 25px;
+}
+
+.valoracion-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+}
+
+.valoracion-item p {
+    margin: 8px 0;
+}
+
+.valoracion-imagen {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sin-valoraciones {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+}
