@@ -91,7 +91,7 @@ async function guardar(req, res) {
     res.status(500).send('Error interno del servidor');
   }
 }
-
+//exportamos el controlador
 module.exports = {
   guardar
 };
