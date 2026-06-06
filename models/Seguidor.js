@@ -28,27 +28,3 @@ Usuario.belongsToMany(Usuario, {
 });
 
 module.exports = Seguidor;
-
-/* CREATE TABLE seguidores (
-    seguidorId INT NOT NULL,
-    seguidoId INT NOT NULL,
-
-    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-    ON UPDATE CURRENT_TIMESTAMP,
-
-    PRIMARY KEY (seguidorId, seguidoId),
-
-    CONSTRAINT fk_seguidores_seguidor
-        FOREIGN KEY (seguidorId)
-        REFERENCES usuarios(id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-
-    CONSTRAINT fk_seguidores_seguido
-        FOREIGN KEY (seguidoId)
-        REFERENCES usuarios(id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-); */
