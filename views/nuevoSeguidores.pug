@@ -1,0 +1,14 @@
+h1 Nuevos seguidores
+
+if notificaciones.length === 0
+
+    p No tenés notificaciones
+
+else
+
+    each n in notificaciones
+        .card
+
+            p= n.mensaje
+
+            small= new Date(n.createdAt).toLocaleString()
