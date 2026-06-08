@@ -1,0 +1,91 @@
+extends layout.pug
+
+block content
+
+  .moderacion-container
+
+    .moderacion-card
+
+      h1 Panel de moderación
+
+      p
+        | Publicaciones denunciadas pendientes de revisión.
+
+      if publicaciones && publicaciones.length > 0
+
+        each publicacion in publicaciones
+
+          article.publicacion-moderacion
+
+            h2
+              | Publicación ##{publicacion.id}
+
+            p
+              strong Usuario:
+              |  #{publicacion.Usuario ? publicacion.Usuario.nombre : 'Usuario'}
+
+            p
+              strong Descripción:
+              |  #{publicacion.descripcion}
+
+            p
+              strong Estado:
+              |  #{publicacion.estadoPublicacion}
+
+            p
+              strong Cantidad de denuncias:
+              |  #{publicacion.Denuncia ? publicacion.Denuncia.length : 0}
+
+            if publicacion.Archivos && publicacion.Archivos.length > 0
+
+              each archivo in publicacion.Archivos
+
+                if archivo.tipo && archivo.tipo.startsWith('image')
+
+                  if archivo.tieneCopyright && archivo.rutaProtegida
+
+                    img.imagen-moderacion(
+                      src=/uploads/${archivo.rutaProtegida}
+                      alt='Imagen denunciada'
+                    )
+
+                  else
+
+                    img.imagen-moderacion(
+                      src=/uploads/${archivo.ruta}
+                      alt='Imagen denunciada'
+                    )
+
+            form(
+              action=/moderacion/${publicacion.id}
+              method='POST'
+            )
+
+              label(for='accion')
+                strong Veredicto:
+
+              select(
+                name='accion'
+                required
+              )
+
+                option(value='')
+                  | Seleccionar acción
+
+                option(value='desestimar')
+                  | Desestimar denuncias
+
+                option(value='bajada')
+                  | Dar de baja publicación
+
+              .acciones-moderacion
+
+                button.btn(
+                  type='submit'
+                )
+                  | Aplicar decisión
+
+      else
+
+        p.sin-publicaciones
+          | No hay publicaciones en revision
