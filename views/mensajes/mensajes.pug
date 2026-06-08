@@ -1,0 +1,87 @@
+extends layout.pug
+
+block content
+
+  .mensajes-container
+
+    .mensajes-card
+
+      if otroUsuario
+
+        h1 Conversación con #{otroUsuario.nombre}
+
+      else
+
+        h1 Mensajes recibidos
+
+      if mensajes && mensajes.length > 0
+
+        each mensaje in mensajes
+
+          article.mensaje-item
+
+            if mensaje.emisor && mensaje.emisor.id === currentUser.id
+
+              p
+                strong Vos:
+                |  #{mensaje.contenido}
+
+            else
+
+              p
+                strong #{mensaje.emisor ? mensaje.emisor.nombre : 'Usuario'}:
+                |  #{mensaje.contenido}
+
+            if mensaje.createdAt
+
+              small.fecha-mensaje
+                | #{mensaje.createdAt}
+
+            if !otroUsuario && mensaje.emisor
+
+              .acciones-mensaje
+
+                a.btn(
+                  href=/mensajes/${mensaje.emisor.id}
+                )
+                  | Responder mensaje
+
+      else
+
+        if otroUsuario
+
+          p.sin-mensajes
+            | Todavía no hay mensajes en esta conversación.
+
+        else
+
+          p.sin-mensajes
+            | No tenés mensajes recibidos.
+
+      if otroUsuario
+
+        h2 Enviar mensaje
+
+        form(
+          action=/mensajes/${otroUsuario.id}
+          method='POST'
+        )
+
+          textarea.mensaje-textarea(
+            name='contenido'
+            rows='4'
+            placeholder='Escribí tu mensaje...'
+            required
+          )
+
+          .acciones-mensaje
+
+            button.btn(
+              type='submit'
+            )
+              | Enviar mensaje
+
+      .acciones-mensaje
+
+        a.btn(href='/')
+          | Volver al inicio

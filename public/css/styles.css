@@ -572,3 +572,65 @@ small {
   border-radius: 4px;
   cursor: pointer;
 }
+
+/* mensajes */
+
+.mensajes-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.mensajes-card {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.1);
+}
+
+.mensajes-card h1 {
+    margin-bottom: 25px;
+}
+
+.mensajes-card h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.mensaje-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+}
+
+.fecha-mensaje {
+    color: #777;
+    display: block;
+    margin-top: 8px;
+}
+
+.mensaje-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.acciones-mensaje {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sin-mensajes {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+}
