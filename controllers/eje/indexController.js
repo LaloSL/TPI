@@ -5,8 +5,8 @@ const Like = require('../../models/Like');
 const Comentario = require('../../models/Comentario');
 const Valoracion = require('../../models/Valoracion');
 const Etiqueta = require('../../models/Etiqueta');
+const Seguidor = require('../../models/Seguidor');
 
-// CALCULAR DATOS DE VALORACIÓN
 function calcularDatosValoracion(publicacion) {
   let suma = 0;
   let cantidad = 0;
@@ -30,9 +30,28 @@ function calcularDatosValoracion(publicacion) {
   };
 }
 
-// Controller del inicio (home)
 async function inicio(req, res) {
   try {
+    const currentUser = req.session.userId
+      ? {
+          id: req.session.userId,
+          nombre: req.session.nombre,
+          rol: req.session.rol
+        }
+      : null;
+
+    let siguiendo = [];
+
+    if (currentUser) {
+      const registrosSeguidos = await Seguidor.findAll({
+        where: {
+          seguidorId: currentUser.id
+        }
+      });
+
+      siguiendo = registrosSeguidos.map(s => s.seguidoId);
+    }
+
     const publicacionesDB = await Publicacion.findAll({
       include: [
         { model: Usuario },
@@ -57,13 +76,8 @@ async function inicio(req, res) {
       const aCalificada = datosA.cantidad >= 3;
       const bCalificada = datosB.cantidad >= 3;
 
-      if (aCalificada && !bCalificada) {
-        return -1;
-      }
-
-      if (!aCalificada && bCalificada) {
-        return 1;
-      }
+      if (aCalificada && !bCalificada) return -1;
+      if (!aCalificada && bCalificada) return 1;
 
       if (datosB.promedio !== datosA.promedio) {
         return datosB.promedio - datosA.promedio;
@@ -72,33 +86,19 @@ async function inicio(req, res) {
       return datosB.cantidad - datosA.cantidad;
     });
 
-    const currentUser = req.session.userId
-      ? {
-          id: req.session.userId,
-          nombre: req.session.nombre,
-          rol: req.session.rol
-        }
-      : null;
-
     res.render('home', {
       publicaciones,
-      currentUser
+      currentUser,
+      siguiendo
     });
 
   } catch (error) {
     console.error('ERROR AL CARGAR HOME:', error);
 
-    const currentUser = req.session.userId
-      ? {
-          id: req.session.userId,
-          nombre: req.session.nombre,
-          rol: req.session.rol
-        }
-      : null;
-
     res.status(500).render('home', {
       publicaciones: [],
-      currentUser,
+      currentUser: null,
+      siguiendo: [],
       error: 'Error al cargar publicaciones'
     });
   }

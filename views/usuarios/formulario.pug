@@ -1,20 +1,36 @@
 extends ../layout
 
 block content
-  if currentUser.rol === 'admin'
-   h1 Registrar nuevo usuario
-  form(action='/usuarios/nuevo', method='POST')
+
+  if currentUser
+    h1 Registrar nuevo usuario
+  else
+    h1 Crear cuenta
+
+  form(
+    action=currentUser ? '/usuarios/nuevo' : '/registro'
+    method='POST'
+  )
     label Nombre:
     input(type='text', name='nombre', required)
     br
+
     label Email:
     input(type='email', name='email', required)
     br
+
     label DNI:
     input(type='text', name='dni', required)
     br
+
+    label Contraseña:
+    input(type='password', name='password', required)
+    br
+
     button(type='submit') Registrar
+
   if error
     p(style='color: red;') #{error}
+
   if success
     p(style='color: green;') #{success}

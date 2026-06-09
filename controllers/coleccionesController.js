@@ -69,7 +69,13 @@ async function guardar(req, res) {
     const { nombre } = req.body;
 
     if (!nombre || nombre.trim() === '') {
-      return res.render('nuevaColeccion', {
+      const colecciones = await Coleccion.findAll({
+        where: { usuarioId },
+        order: [['createdAt', 'DESC']]
+      });
+
+      return res.render('colecciones', {
+        colecciones,
         error: 'Debe ingresar un nombre'
       });
     }
@@ -84,7 +90,13 @@ async function guardar(req, res) {
     });
 
     if (coleccionExistente) {
-      return res.render('nuevaColeccion', {
+      const colecciones = await Coleccion.findAll({
+        where: { usuarioId },
+        order: [['createdAt', 'DESC']]
+      });
+
+      return res.render('colecciones', {
+        colecciones,
         error: 'Ya tenés una colección con ese nombre'
       });
     }

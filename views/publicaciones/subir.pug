@@ -1,58 +1,77 @@
-extends layout.pug
+extends ../layout.pug
 
 block content
 
-.subir-container
+  .subir-container
 
+    .subir-card
 
-.subir-card
+      h1 Nueva publicación
 
-  h1 Nueva publicación
+      p.subir-subtitulo
+        | Compartí tus mejores fotografías y videos con la comunidad.
 
-  p.subir-subtitulo
-    Compartí tus mejores fotografías y videos con la comunidad.
+      if error
+        .error-message
+          p= error
 
-  if error
-    .error-message
-      p= error
+      form(action='/subir', method='POST', enctype='multipart/form-data')
 
-  form(action="/subir", method="POST", enctype="multipart/form-data")
+        .form-group
+          label(for='imagenes')
+            | Imágenes o videos
 
-    .form-group
-      label(for="imagenes")
-        | Imágenes o videos
+          input#imagenes(
+            type='file'
+            name='imagenes'
+            accept='image/*,video/*'
+            multiple
+            required
+          )
 
-      input#imagenes(
-        type="file"
-        name="imagenes"
-        accept="image/,video/"
-        multiple
-        required
-      )
+        .form-group
+          label(for='descripcion')
+            | Descripción
 
-    .form-group
-      label(for="descripcion")
-        | Descripción
+          textarea#descripcion(
+            name='descripcion'
+            rows='4'
+            cols='50'
+            placeholder='Contanos sobre esta publicación...'
+            required
+          )
 
-      textarea#descripcion(
-        name="descripcion"
-        rows="4"
-        placeholder="Contanos sobre esta publicación..."
-        required
-      )
+        .form-group
+          label(for='etiqueta')
+            | Etiqueta
 
-    .form-group
-      label(for="etiqueta")
-        | Etiqueta
+          input#etiqueta(
+            type='text'
+            name='etiqueta'
+            placeholder='Ej: paisaje, naturaleza, atardecer'
+            required
+          )
 
-      input#etiqueta(
-        type="text"
-        name="etiqueta"
-        placeholder="Ej: paisaje, naturaleza, atardecer"
-        required
-      )
+        .form-group
+          label(for='tieneCopyright')
+            | Licencia de la imagen:
 
-    button.btn-publicar(type="submit")
-      | Publicar
+          select#tieneCopyright(
+            name='tieneCopyright'
+            required
+          )
+            option(
+              value=''
+              disabled
+              selected
+            )
+              | Seleccionar licencia
 
- subir.pug
+            option(value='0')
+              | Sin copyright
+
+            option(value='1')
+              | Con copyright y marca de agua
+
+        button.btn-publicar(type='submit')
+          | Publicar

@@ -4,12 +4,36 @@ block content
 
   h1 Mis colecciones
 
-  br
+  hr
 
-  a.btn(href='/colecciones/nueva')
-    | Nueva colección
+  h2 Crear nueva colección
+
+  if error
+    p(style='color: red;') #{error}
+
+  form(action='/colecciones', method='POST')
+
+    div
+      label(for='nombre')
+        | Nombre de la colección
+
+      br
+
+      input#nombre(
+        type='text'
+        name='nombre'
+        placeholder='Ej: Autos clásicos'
+        required
+      )
+
+    br
+
+    button.btn(type='submit')
+      | Crear colección
 
   hr
+
+  h2 Colecciones creadas
 
   if colecciones && colecciones.length > 0
 
@@ -27,6 +51,13 @@ block content
 
         a.btn(href=`/colecciones/${coleccion.id}`)
           | Ver colección
+
+        form(
+          action=`/colecciones/${coleccion.id}/eliminar`
+          method='POST'
+        )
+          button.btn(type='submit')
+            | Eliminar
 
         hr
 

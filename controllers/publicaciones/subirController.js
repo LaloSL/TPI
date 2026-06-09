@@ -1,12 +1,10 @@
 const path = require('path');
-//librería para agregar marca de agua 
 const sharp = require('sharp');
 
 const Publicacion = require('../../models/Publicacion');
 const Archivo = require('../../models/Archivo');
 const Etiqueta = require('../../models/Etiqueta');
 const PublicacionEtiqueta = require('../../models/PublicacionEtiqueta');
-
 
 async function formulario(req, res) {
   try {
@@ -24,12 +22,8 @@ async function formulario(req, res) {
   }
 }
 
-
-// ==================================================================================================================
-
 async function guardar(req, res) {
   try {
-
     const {
       descripcion,
       etiqueta,
@@ -40,7 +34,6 @@ async function guardar(req, res) {
       parseInt(tieneCopyright) === 1;
 
     if (!descripcion) {
-
       return res.status(400).render('publicaciones/subir', {
         title: 'Subir publicación',
         error: 'La descripción es obligatoria'
@@ -48,7 +41,6 @@ async function guardar(req, res) {
     }
 
     if (!etiqueta || etiqueta.trim() === '') {
-
       return res.status(400).render('publicaciones/subir', {
         title: 'Subir publicación',
         error: 'La etiqueta es obligatoria'
@@ -56,7 +48,6 @@ async function guardar(req, res) {
     }
 
     if (!req.files || req.files.length === 0) {
-
       return res.status(400).render('publicaciones/subir', {
         title: 'Subir publicación',
         error: 'Debes subir al menos una imagen o video'
@@ -64,7 +55,6 @@ async function guardar(req, res) {
     }
 
     if (!req.session.userId) {
-
       return res.status(401).render('publicaciones/subir', {
         title: 'Subir publicación',
         error: 'Debes iniciar sesión'
@@ -74,24 +64,19 @@ async function guardar(req, res) {
     const userId = req.session.userId;
 
     const publicacion = await Publicacion.create({
-
       usuarioId: userId,
       descripcion,
       ubicacion: '',
       fecha: new Date()
-
     });
 
     for (const archivo of req.files) {
-
       let rutaProtegida = null;
 
-      //es imagen y protegida?
       if (
         copyrightActivo &&
         archivo.mimetype.startsWith('image/')
       ) {
-
         const rutaOriginalFisica = archivo.path;
 
         const nombreProtegido =
@@ -105,13 +90,12 @@ async function guardar(req, res) {
 
         const rutaMarcaAgua = path.join(
           __dirname,
-          '../public/MarcaDeAgua/marcaDeAgua.png'
+          '../../public/MarcaDeAgua/marcaDeAgua.png'
         );
 
         const metadata =
           await sharp(rutaOriginalFisica).metadata();
 
-        //modifica tañamo marca de agua
         const anchoMarcaAgua =
           Math.round(metadata.width * 0.45);
 
@@ -135,55 +119,45 @@ async function guardar(req, res) {
       }
 
       await Archivo.create({
-
         usuarioId: userId,
         ruta: archivo.filename,
         tipo: archivo.mimetype,
         size: archivo.size,
         publicacionId: publicacion.id,
         fecha: new Date(),
-
         tieneCopyright: copyrightActivo,
-
         rutaProtegida
-
       });
     }
 
     const [etiquetaCreada] =
       await Etiqueta.findOrCreate({
-
         where: {
           nombre: etiqueta.trim().toLowerCase()
         }
-
       });
 
-
     await PublicacionEtiqueta.findOrCreate({
-
       where: {
         publicacionId: publicacion.id,
         etiquetaId: etiquetaCreada.id
       }
-
     });
+
     res.redirect('/');
 
   } catch (error) {
-
     console.error(
       'ERROR REAL AL GUARDAR PUBLICACIÓN:',
       error
     );
 
-    res.status(500).render('subir', {
+    res.status(500).render('publicaciones/subir', {
       title: 'Subir publicación',
       error: 'Error al guardar la publicación'
     });
   }
 }
-
 
 module.exports = {
   formulario,
