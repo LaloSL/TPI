@@ -1,7 +1,7 @@
-const Like = require('../models/Like');
-const Usuario = require('../models/Usuario'); 
-const Publicacion = require('../models/Publicacion');
-const Archivo = require('../models/Archivo');
+const Like = require('../../models/Like');
+const Usuario = require('../../models/Usuario'); 
+const Publicacion = require('../../models/Publicacion');
+const Archivo = require('../../models/Archivo');
 
 
 

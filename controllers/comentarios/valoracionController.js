@@ -1,6 +1,6 @@
-const Valoracion = require('../models/Valoracion');
-const Archivo = require('../models/Archivo');
-const Publicacion = require('../models/Publicacion');
+const Valoracion = require('../../models/Valoracion');
+const Archivo = require('../../models/Archivo');
+const Publicacion = require('../../models/Publicacion');
 
 async function guardar(req, res) {
 
@@ -91,7 +91,7 @@ async function guardar(req, res) {
     res.status(500).send('Error interno del servidor');
   }
 }
-//exportamos el controlador
+
 module.exports = {
   guardar
 };

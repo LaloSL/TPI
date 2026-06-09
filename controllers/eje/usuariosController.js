@@ -1,12 +1,11 @@
-const Usuario = require('../models/Usuario');
-const Seguidor = require('../models/Seguidor');
-const Publicacion = require('../models/Publicacion');
-const Archivo = require('../models/Archivo');
-const Notificacion = require('../models/Notificacion');
-
-
+const Usuario = require('../../models/Usuario');
+const Seguidor = require('../../models/Seguidor');
+const Publicacion = require('../../models/Publicacion');
+const Archivo = require('../../models/Archivo');
+const Notificacion = require('../../models/Notificacion');
 
 const { Op } = require('sequelize');
+
 
 async function listar(req, res) {
 
@@ -16,7 +15,7 @@ async function listar(req, res) {
 
     let siguiendo = [];
 
-    // Buscar usuarios que sigue el usuario actual
+    // Buscar usuarios 
     if (req.session.userId) {
 
       const seguidos = await Seguidor.findAll({

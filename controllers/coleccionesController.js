@@ -1,10 +1,8 @@
-const Coleccion = require('../models/Coleccion');
-const Publicacion = require('../models/Publicacion');
-const Usuario = require('../models/Usuario');
-const Archivo = require('../models/Archivo');
-const ColeccionPublicacion = require('../models/ColeccionPublicacion');
-
-// ===========================================
+const Coleccion = require('../../models/Coleccion');
+const Publicacion = require('../../models/Publicacion');
+const Usuario = require('../../models/Usuario');
+const Archivo = require('../../models/Archivo');
+const ColeccionPublicacion = require('../../models/ColeccionPublicacion');
 
 async function listar(req, res) {
   try {
@@ -26,8 +24,6 @@ async function listar(req, res) {
     res.status(500).send('Error al listar colecciones');
   }
 }
-
-// =========================================
 
 async function formulario(req, res) {
 
@@ -66,8 +62,6 @@ async function formulario(req, res) {
     );
   }
 }
-
-// =========================================================
 
 async function guardar(req, res) {
   try {
@@ -108,8 +102,6 @@ async function guardar(req, res) {
   }
 }
 
-// ====================================================
-
 async function verColeccion(req, res) {
   try {
     const { id } = req.params;
@@ -148,8 +140,6 @@ async function verColeccion(req, res) {
     res.status(500).send('Error al ver colección');
   }
 }
-
-// ========================================================
 
 async function agregarPublicacion(req, res) {
   try {
@@ -191,7 +181,6 @@ async function agregarPublicacion(req, res) {
   }
 }
 
-// =============================================================
 
 async function eliminar(req, res) {
   try {

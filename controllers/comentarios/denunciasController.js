@@ -1,6 +1,6 @@
-const Denuncia = require('../models/Denuncia');
-const Publicacion = require('../models/Publicacion');
-const Usuario = require('../models/Usuario');
+const Denuncia = require('../../models/Denuncia');
+const Publicacion = require('../../models/Publicacion');
+const Usuario = require('../../models/Usuario');
 
 
 async function formulario(req, res) {

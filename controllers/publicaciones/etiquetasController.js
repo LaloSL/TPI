@@ -1,4 +1,4 @@
-const Etiqueta = require('../models/Etiqueta');
+const Etiqueta = require('../../models/Etiqueta');
 
 async function listar(req, res) {
   try {

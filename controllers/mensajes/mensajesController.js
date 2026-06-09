@@ -1,8 +1,8 @@
-const Mensaje = require('../models/Mensaje');
-const Usuario = require('../models/Usuario');
+const Mensaje = require('../../models/Mensaje');
+const Usuario = require('../../models/Usuario');
 const { Op } = require('sequelize');
 
-//======================================================================
+
 async function conversacion(req, res) {
   try {
     const usuarioLogueadoId = req.session.userId;
@@ -56,7 +56,7 @@ async function conversacion(req, res) {
   }
 }
 
-//=============================================================================
+// Enviar mensaje
 async function enviar(req, res) {
   try {
     const emisorId = req.session.userId;
@@ -79,7 +79,9 @@ async function enviar(req, res) {
     console.error('Error al enviar mensaje:', error);
     res.status(500).send('Error interno del servidor');
   }
-}//=======================================================================
+}
+
+// Ver mensajes recibidos
 async function recibidos(req, res) {
   try {
     const usuarioId = req.session.userId;

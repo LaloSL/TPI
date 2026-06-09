@@ -1,6 +1,6 @@
-const Comentario = require('../models/Comentario');
-const Publicacion = require('../models/Publicacion');
-const Usuario = require('../models/Usuario');
+const Comentario = require('../../models/Comentario');
+const Publicacion = require('../../models/Publicacion');
+const Usuario = require('../../models/Usuario');
 
 async function crear(req, res) {
   try {

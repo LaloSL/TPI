@@ -2,10 +2,10 @@ const path = require('path');
 //librería para agregar marca de agua 
 const sharp = require('sharp');
 
-const Publicacion = require('../models/Publicacion');
-const Archivo = require('../models/Archivo');
-const Etiqueta = require('../models/Etiqueta');
-const PublicacionEtiqueta = require('../models/PublicacionEtiqueta');
+const Publicacion = require('../../models/Publicacion');
+const Archivo = require('../../models/Archivo');
+const Etiqueta = require('../../models/Etiqueta');
+const PublicacionEtiqueta = require('../../models/PublicacionEtiqueta');
 
 
 async function formulario(req, res) {

@@ -1,6 +1,6 @@
-const Seguidor = require('../models/Seguidor');
-const Usuario = require('../models/Usuario');
-const Publicacion = require('../models/Publicacion');
+const Seguidor = require('../../models/Seguidor');
+const Usuario = require('../../models/Usuario');
+const Publicacion = require('../../models/Publicacion');
 
 const seguirUsuario = async (req, res) => {
 

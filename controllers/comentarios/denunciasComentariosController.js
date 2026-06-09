@@ -1,7 +1,7 @@
-const DenunciaComentario = require('../models/DenunciaComentario');
-const Comentario = require('../models/Comentario');
-const Usuario = require('../models/Usuario');
-const Publicacion = require('../models/Publicacion');
+const DenunciaComentario = require('../../models/DenunciaComentario');
+const Comentario = require('../../models/Comentario');
+const Usuario = require('../../models/Usuario');
+const Publicacion = require('../../models/Publicacion');
 
 
 async function guardar(req, res) {

@@ -1,4 +1,4 @@
-const Publicacion = require('../models/Publicacion');
+const Publicacion = require('../../models/Publicacion');
 async function modificarEstadoComentarios(req, res) {
 
   try {

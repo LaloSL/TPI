@@ -1,7 +1,7 @@
-const Publicacion = require('../models/Publicacion');
-const Usuario = require('../models/Usuario');
-const Archivo = require('../models/Archivo');
-const Denuncia = require('../models/Denuncia');
+const Publicacion = require('../../models/Publicacion');
+const Usuario = require('../../models/Usuario');
+const Archivo = require('../../models/Archivo');
+const Denuncia = require('../../models/Denuncia');
 
 //publicaciones en revision
 
