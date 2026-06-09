@@ -1,16 +1,27 @@
-const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: 'mysql',
-    logging: false,
-  }
-);
+const { Sequelize } = require('sequelize');
+const pg = require('pg');
+
+const sslConn = process.env.DB_SSL === 'true'
+  ? {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
+  : undefined;
+
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  dialectModule: pg,
+  dialectOptions: sslConn,
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  logging: false
+});
 
 module.exports = sequelize;

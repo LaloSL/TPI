@@ -2,9 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const notificacionesController = require('../controllers/comentarios/notificacionesController');
+const notificacionesController = require('../../controllers/comentarios/notificacionesController');
 
-const { requireAuth } = require('../middleware/auth');
+const { requireAuth } = require('../../middleware/auth');
 
 router.get('/comentarios', requireAuth, notificacionesController.comentariosRecibidos);
 

@@ -21,16 +21,17 @@ const PORT = process.env.PORT || 3000;
 
 
 // Rutas principales
-const indexRoutes = require('./routes/principal/index');
-const usuariosRoutes = require('./routes/principal/usuarios');
-const administradorRoutes = require('./routes/principal/admin');
-const seguidoresRoutes = require('./routes/principal/seguidores');
+const indexRoutes = require('./routes/eje/index');
+const usuariosRoutes = require('./routes/eje/usuarios');
+const administradorRoutes = require('./routes/eje/admin');
+const seguidoresRoutes = require('./routes/seguidores');
 
 //publicaciones
-const subirRoutes = require('./routes/publicacion/subirRoutes'); 
-const publicacionesRoutes = require('./routes/publicacion/publicacionesRoutes');
-const etiquetasRoutes = require('./routes/publicacion/etiquetasRoutes');
-const publicarEtiquetasRoutes = require('./routes/publicacion/publicarEtiquetas');
+const subirRoutes = require('./routes/publicaciones/subirRoutes'); 
+const publicacionesRoutes = require('./routes/publicaciones/publicacionesRoutes');
+const etiquetasRoutes = require('./routes/publicaciones/etiquetas');
+const publicarEtiquetasRoutes = require('./routes/publicaciones/publicarEtiquetas');
+const moderacionRoutes = require('./routes/publicaciones/moderacion');
 
 //interacciones del sistema
 const likesRoutes = require('./routes/comentarios/like');
@@ -39,13 +40,13 @@ const valoracionesRoutes = require('./routes/comentarios/valoracion');
 const denunciasRoutes = require('./routes/comentarios/denuncias');
 const denunciasComentariosRoutes = require('./routes/comentarios/denunciasComentarios');
 const notificacionesRoutes = require('./routes/comentarios/notificaciones');
-const moderacionRoutes = require('./routes/publicacion/moderacion');
+
 
 //mensajes
 const mensajesRoutes = require('./routes/mensajes/mensajes');
 
-//colecciones
-const coleccionesRoutes = require('./routes/colecciones/colecciones');
+
+const coleccionesRoutes = require('./routes/colecciones');
 
 
 // Configuración de Pug

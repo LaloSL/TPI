@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const publicacionesController = require('../controllers/publicacciones/publicacionesController');
+const publicacionesController = require('../../controllers/publicaciones/publicacionesController');
 
 
 function validarSesion(req, res, next) {

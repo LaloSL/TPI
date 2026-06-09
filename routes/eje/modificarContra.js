@@ -1,5 +1,5 @@
 const express = require('express');
-const modiController = require('../controllers/eje/modificarContraController');
+const modiController = require('../../controllers/eje/modificarContraController');
 
 const router = express.Router();
 

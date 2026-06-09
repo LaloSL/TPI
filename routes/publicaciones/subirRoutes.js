@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const subirController = require('../controllers/publicacciones/subirController');
-const upload = require('../middleware/upload');
+const subirController = require('../../controllers/publicaciones/subirController');
+const upload = require('../../middleware/upload');
 
 function validarSesion(req, res, next) {
   if (!req.session.userId) {

@@ -2,13 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-const moderacionController =
-  require('../controllers/publicacciones/moderacionController');
-
-const {
-  requireAuth,
-  requireAdmin
-} = require('../middleware/auth');
+const moderacionController = require('../../controllers/publicaciones/moderacionController');
+const {requireAuth, requireAdmin} = require('../../middleware/auth');
 
 
 router.get('/', requireAuth, requireAdmin, moderacionController.listar);

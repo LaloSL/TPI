@@ -1,8 +1,8 @@
-const Coleccion = require('../../models/Coleccion');
-const Publicacion = require('../../models/Publicacion');
-const Usuario = require('../../models/Usuario');
-const Archivo = require('../../models/Archivo');
-const ColeccionPublicacion = require('../../models/ColeccionPublicacion');
+const Coleccion = require('../models/Coleccion');
+const Publicacion = require('../models/Publicacion');
+const Usuario = require('../models/Usuario');
+const Archivo = require('../models/Archivo');
+const ColeccionPublicacion = require('../models/ColeccionPublicacion');
 
 async function listar(req, res) {
   try {
