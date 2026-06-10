@@ -9,6 +9,24 @@ const session = require('express-session');
 const app = express();
 const sequelize = require('./models/db');
 
+require('./models/Usuario');
+require('./models/Publicacion');
+require('./models/Archivo');
+require('./models/Comentario');
+require('./models/Like');
+require('./models/Valoracion');
+require('./models/Etiqueta');
+require('./models/PublicacionEtiqueta');
+require('./models/Denuncia');
+require('./models/DenunciaComentario');
+require('./models/Seguidor');
+require('./models/Notificacion');
+require('./models/Coleccion');
+require('./models/ColeccionPublicacion');
+require('./models/Interes');
+require('./models/Mensaje');
+
+
 // Middleware
 const { getCurrentUser } = require('./middleware/auth');
 app.use(express.json());
