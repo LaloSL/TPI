@@ -5,7 +5,7 @@ const upload = require('../../middleware/upload');
 
 function validarSesion(req, res, next) {
   if (!req.session.userId) {
-    return res.status(401).render('subir', {
+    return res.status(401).render('publicaciones/subir', {
       title: 'Subir publicación',
       error: 'Debes iniciar sesión para subir una publicación'
     });
@@ -14,7 +14,7 @@ function validarSesion(req, res, next) {
   next();
 }
 
-router.get('/', subirController.formulario);
+router.get('/',validarSesion, subirController.formulario);
 
 router.post('/', validarSesion, upload.array('imagenes'), subirController.guardar);
 
