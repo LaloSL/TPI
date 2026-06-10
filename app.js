@@ -25,6 +25,7 @@ require('./models/Coleccion');
 require('./models/ColeccionPublicacion');
 require('./models/Interes');
 require('./models/Mensaje');
+console.log('MODELOS CARGADOS:', Object.keys(sequelize.models));
 
 
 // Middleware
