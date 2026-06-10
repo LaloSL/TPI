@@ -8,7 +8,7 @@ const session = require('express-session');
 
 const app = express();
 const sequelize = require('./models/db');
-
+//prueba
 require('./models/Usuario');
 require('./models/Publicacion');
 require('./models/Archivo');
