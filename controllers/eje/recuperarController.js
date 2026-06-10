@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const Usuario = require('../models/Usuario');
+const Usuario = require('../../models/Usuario');
 
 async function formulario(req, res) {
   res.render('recuperar');
@@ -31,12 +31,12 @@ async function recuperar(req, res) {
 
   } catch (error) {
     console.error('Error al recuperar contraseña:', error);
+
     res.render('recuperar', {
       error: 'Error interno al recuperar contraseña'
     });
   }
 }
-
 
 module.exports = {
   formulario,

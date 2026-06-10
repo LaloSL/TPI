@@ -1,50 +1,52 @@
-extends layout.pug
+extends ../layout.pug
 
 block content
 
-    .valoraciones-container
+  .valoraciones-container
 
-        .valoraciones-card
+    .valoraciones-card
 
-            h1 Valoraciones recibidas
+      h1 Valoraciones recibidas
 
-            if valoraciones && valoraciones.length > 0
+      if valoraciones && valoraciones.length > 0
 
-                each valoracion in valoraciones
+        each valoracion in valoraciones
 
-                    article.valoracion-item
+          article.valoracion-item
 
-                        p
-                            strong Usuario:
-                            |  #{valoracion.Usuario ? valoracion.Usuario.nombre : 'Usuario'}
+            p
+              strong Usuario:
+              |  #{valoracion.Usuario ? valoracion.Usuario.nombre : 'Usuario'}
 
-                        p
-                            strong Valoración:
-                            |  #{valoracion.valor} / 5
+            p
+              strong Valoración:
+              |  #{valoracion.valor} / 5
 
-                        if valoracion.Archivo && valoracion.Archivo.Publicacion
+            if valoracion.Archivo && valoracion.Archivo.Publicacion
 
-                            p
-                                strong Publicación:
-                                |  #{valoracion.Archivo.Publicacion.descripcion}
+              p
+                strong Publicación:
+                |  #{valoracion.Archivo.Publicacion.descripcion}
 
-                        if valoracion.Archivo
+            if valoracion.Archivo
 
-                            p
-                                strong Imagen:
+              p
+                strong Imagen:
 
-                            img.valoracion-imagen(
-                                src=/uploads/${valoracion.Archivo.rutaProtegida || valoracion.Archivo.ruta}
-                                alt='Imagen valorada'
-                            )
+              img.valoracion-imagen(
+                src='/uploads/' + (valoracion.Archivo.rutaProtegida || valoracion.Archivo.ruta)
+                alt='Imagen valorada'
+              )
 
-                        if valoracion.createdAt
+            if valoracion.createdAt
 
-                            p
-                                strong Fecha:
-                                |  #{valoracion.createdAt}
+              p
+                strong Fecha:
+                |  #{valoracion.createdAt}
 
-            else
+            hr
 
-                p.sin-valoraciones
-                    | No recibiste valoraciones todavía.
+      else
+
+        p.sin-valoraciones
+          | No recibiste valoraciones todavía.

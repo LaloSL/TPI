@@ -70,7 +70,7 @@ async function valoracionesRecibidas(req, res) {
       );
     });
 
-    res.render('valoracionesRecibidas', {
+    res.render('comentarios/valoracionesRecibidas', {
       valoraciones: valoracionesFiltradas
     });
 

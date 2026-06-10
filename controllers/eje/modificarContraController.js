@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
-const Usuario = require('../models/Usuario');
+const Usuario = require('../../models/Usuario');
 
 async function formulario(req, res) {
-    res.render('modificarContraseña');
+    res.render('modiContra');
 }
 
 async function modificar(req, res) {
@@ -18,7 +18,7 @@ async function modificar(req, res) {
         const passwordValida = await usuario.validarPassword(passwordActual);
 
         if (!passwordValida) {
-            return res.render('modificarContraseña', {
+            return res.render('modiContra', {
                 error: 'La contraseña actual es incorrecta'
             });
         }
@@ -28,15 +28,18 @@ async function modificar(req, res) {
         usuario.password = passwordHash;
         await usuario.save();
 
-        res.render('modificarContraseña', {
+        res.render('modiContra', {
             mensaje: 'Contraseña modificada correctamente'
         });
 
     } catch (error) {
+
         console.error('Error al modificar contraseña:', error);
+
         res.render('modiContra', {
             error: 'Error interno al modificar contraseña'
         });
+
     }
 }
 

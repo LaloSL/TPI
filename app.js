@@ -25,6 +25,9 @@ const indexRoutes = require('./routes/eje/index');
 const usuariosRoutes = require('./routes/eje/usuarios');
 const administradorRoutes = require('./routes/eje/admin');
 const seguidoresRoutes = require('./routes/seguidores');
+const modificarContraRoutes = require('./routes/eje/modificarContra');
+const recuperarRoutes = require('./routes/eje/recuperarContra');
+
 
 //publicaciones
 const subirRoutes = require('./routes/publicaciones/subirRoutes'); 
@@ -40,6 +43,8 @@ const valoracionesRoutes = require('./routes/comentarios/valoracion');
 const denunciasRoutes = require('./routes/comentarios/denuncias');
 const denunciasComentariosRoutes = require('./routes/comentarios/denunciasComentarios');
 const notificacionesRoutes = require('./routes/comentarios/notificaciones');
+const interesesRoutes = require('./routes/intereses/intereses');
+const interesadosRoutes = require('./routes/intereses/interesados');
 
 
 //mensajes
@@ -77,6 +82,8 @@ app.use('/', indexRoutes);
 app.use('/usuarios', usuariosRoutes);
 app.use('/administrador', administradorRoutes);
 app.use('/seguidores', seguidoresRoutes);
+app.use('/recuperar', recuperarRoutes);
+app.use('/modiContra', modificarContraRoutes);
 
 //publicaciones
 app.use('/subir', subirRoutes);
@@ -94,6 +101,9 @@ app.use('/valoraciones', valoracionesRoutes);
 app.use('/denuncias', denunciasRoutes);
 app.use('/denuncias-comentarios', denunciasComentariosRoutes);
 app.use('/notificaciones', notificacionesRoutes);
+app.use('/intereses', interesesRoutes);
+app.use('/interesados', interesadosRoutes);
+
 
 sequelize
   .sync()
