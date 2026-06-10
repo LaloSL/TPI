@@ -1,6 +1,6 @@
 const Etiqueta = require('../../models/Etiqueta');
 const Publicacion = require('../../models/Publicacion');
-const publicacionEtiqueta = require('../../models/publicacionEtiqueta');
+const PublicacionEtiqueta = require('../../models/PublicacionEtiqueta');
 
 async function guardar(req, res) {
 
