@@ -6,9 +6,9 @@ const Archivo = require('../../models/Archivo');
 const Notificacion = require('../../models/Notificacion');
 const Seguidor = require('../../models/Seguidor');
 
-
 async function comentariosRecibidos(req, res) {
   try {
+
     const usuarioId = req.session.userId;
 
     const comentarios = await Comentario.findAll({
@@ -20,7 +20,7 @@ async function comentariosRecibidos(req, res) {
           model: Publicacion
         }
       ],
-      order: [['createdAt', 'DESC']]  //ordenamiento
+      order: [['createdAt', 'DESC']]
     });
 
     const comentariosFiltrados = comentarios.filter(c => {
@@ -30,19 +30,26 @@ async function comentariosRecibidos(req, res) {
       );
     });
 
-    res.render('comentariosRecibidos', {
+    res.render('comentarios/comentariosRecibidos', {
       comentarios: comentariosFiltrados
     });
 
   } catch (error) {
-    console.error('Error al cargar comentarios recibidos:', error);
-    res.status(500).send('Error al cargar comentarios recibidos');
+
+    console.error(
+      'Error al cargar comentarios recibidos:',
+      error
+    );
+
+    res
+      .status(500)
+      .send('Error al cargar comentarios recibidos');
   }
 }
 
-
 async function valoracionesRecibidas(req, res) {
   try {
+
     const usuarioId = req.session.userId;
 
     const valoraciones = await Valoracion.findAll({
@@ -70,23 +77,28 @@ async function valoracionesRecibidas(req, res) {
       );
     });
 
-    res.render('valoracionesRecibidas', {
+    res.render('comentarios/valoracionesRecibidas', {
       valoraciones: valoracionesFiltradas
     });
 
   } catch (error) {
-    console.error('Error al cargar valoraciones recibidas:', error);
-    res.status(500).send('Error al cargar valoraciones recibidas');
+
+    console.error(
+      'Error al cargar valoraciones recibidas:',
+      error
+    );
+
+    res
+      .status(500)
+      .send('Error al cargar valoraciones recibidas');
   }
 }
-
 
 async function nuevosSeguidores(req, res) {
 
   try {
 
-    const usuarioId =
-      req.session.userId;
+    const usuarioId = req.session.userId;
 
     const notificaciones =
       await Notificacion.findAll({
@@ -101,10 +113,9 @@ async function nuevosSeguidores(req, res) {
 
       });
 
-    res.render( 'nuevosSeguidores', {
-        notificaciones
-      }
-    );
+    res.render('nuevoSeguidores', {
+      notificaciones
+    });
 
   } catch (error) {
 
@@ -118,17 +129,14 @@ async function nuevosSeguidores(req, res) {
       .send(
         'Error al cargar notificaciones'
       );
-
   }
-
 }
 
 async function verNotificaciones(req, res) {
 
   try {
 
-    const usuarioId =
-      req.session.userId;
+    const usuarioId = req.session.userId;
 
     const notificaciones =
       await Notificacion.findAll({
@@ -143,21 +151,20 @@ async function verNotificaciones(req, res) {
 
       });
 
-    res.render('notificaciones',{
-        notificaciones
-      }
-    );
+    res.render('notificaciones', {
+      notificaciones
+    });
 
   } catch (error) {
 
     console.error(error);
 
-    res.send(
-      'Error al cargar notificaciones'
-    );
-
+    res
+      .status(500)
+      .send(
+        'Error al cargar notificaciones'
+      );
   }
-
 }
 
 module.exports = {
@@ -165,4 +172,4 @@ module.exports = {
   valoracionesRecibidas,
   nuevosSeguidores,
   verNotificaciones
-}; 
+};

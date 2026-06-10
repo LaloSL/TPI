@@ -1,44 +1,88 @@
 doctype html
+
 html
+
   head
+
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
     title Sistema de Publicaciones
+
     link(rel='stylesheet', href='/css/style.css')
 
   body
+
     nav
+
       div.items
-        a(href='/') Inicio
+
+        a(href='/')
+          | Inicio
 
         if currentUser
-          a(href='/subir') Subir publicación
-          a(href='/colecciones') Mis colecciones
-          a(href='/colecciones/nueva') Nueva colección
+
+          a(href='/usuarios')
+            | Usuarios
+
+          a(href='/subir')
+            | Subir publicación
+
+          a(href='/colecciones')
+            | Mis colecciones
+
+
+          a(href='/denuncias-comentarios')
+            | Comentarios denunciados
 
           div.menu-notificaciones
+
             button.boton-notificaciones(type='button')
               | Notificaciones ▾
 
             div.opciones-notificaciones
-              a(href='/notificaciones/comentarios') Comentarios recibidos
-              a(href='/notificaciones/valoraciones') Valoraciones recibidas
-              a(href='/intereses/mis-intereses') Me interesa
-              a(href='/notificaciones/seguidores') Seguidores nuevos
-              a(href='/mensajes') Mensajes recibidos
+
+              a(href='/notificaciones/comentarios')
+                | Comentarios recibidos
+
+              a(href='/notificaciones/valoraciones')
+                | Valoraciones recibidas
+
+              a(href='/intereses/mis-intereses')
+                | Me interesa
+
+              a(href='/notificaciones/seguidores')
+                | Seguidores nuevos
+
+              a(href='/mensajes')
+                | Mensajes recibidos
 
           if currentUser.rol === 'admin'
-            a(href='/usuarios') Usuarios
-            a(href='/administrador') Administrador
 
-          a(href='/modiContra') Modificar contraseña
+            a(href='/administrador')
+              | Administrador
+
+            a(href='/moderacion')
+              | Moderación
+
+          a(href='/modiContra')
+            | Modificar contraseña
 
       div.login
+
         if currentUser
-          span Bienvenido, #{currentUser.nombre} (#{currentUser.rol})
-          a(href='/logout') Cerrar Sesión
+
+          span
+            | Bienvenido, #{currentUser.nombre} (#{currentUser.rol})
+
+          a(href='/logout')
+            | Cerrar Sesión
+
         else
-          a(href='/login') Login
+
+          a(href='/login')
+            | Login
 
     .contenedor
+
       block content

@@ -1,4 +1,4 @@
-extends layout.pug
+extends ../layout.pug
 
 block content
 
@@ -28,7 +28,7 @@ block content
       hr
 
       form(
-        action=/denuncias/${publicacion.id}
+        action=`/denuncias/${publicacion.id}`
         method='POST'
       )
 

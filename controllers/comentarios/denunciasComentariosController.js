@@ -80,7 +80,7 @@ async function listar(req, res) {
       );
     });
 
-    res.render('denunciasComentarios', {
+    res.render('comentarios/denunciasComentarios', {
       denuncias: denunciasFiltradas
     });
 

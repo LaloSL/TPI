@@ -30,7 +30,7 @@ async function comentariosRecibidos(req, res) {
       );
     });
 
-    res.render('comentariosRecibidos', {
+    res.render('comentarios/comentariosRecibidos', {
       comentarios: comentariosFiltrados
     });
 
