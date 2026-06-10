@@ -171,13 +171,13 @@ block content
             if archivo.tipo && archivo.tipo.startsWith('image')
               if archivo.tieneCopyright && archivo.rutaProtegida
                 img(
-                  src=`/uploads/${archivo.rutaProtegida}`
+                  src=archivo.rutaProtegida
                   alt='Imagen protegida'
                   width='100%'
                 )
               else
                 img(
-                  src=`/uploads/${archivo.ruta}`
+                  src=archivo.ruta
                   alt='Imagen original'
                   width='100%'
                 )
@@ -185,7 +185,7 @@ block content
             else if archivo.tipo && archivo.tipo.startsWith('video')
               video(width='100%' controls)
                 source(
-                  src=`/uploads/${archivo.ruta}`
+                  src=archivo.ruta
                   type=archivo.tipo
                 )
 

@@ -11,7 +11,7 @@ Archivo.init(
   {
 
     ruta: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(1000),
       allowNull: false
     },
 
@@ -40,7 +40,7 @@ Archivo.init(
 
 
     rutaProtegida: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(1000),
       allowNull: true
     }
 
