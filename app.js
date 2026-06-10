@@ -140,7 +140,7 @@ sequelize
   });*/
 //vercel
   sequelize
-  .sync()
+  .sync({ alter: true })
   .then(() => {
     console.log('Modelos sincronizados correctamente');
   })
