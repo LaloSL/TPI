@@ -1,10 +1,32 @@
-const path = require('path');
 const sharp = require('sharp');
+const cloudinary = require('../../config/cloudinary');
 
 const Publicacion = require('../../models/Publicacion');
 const Archivo = require('../../models/Archivo');
 const Etiqueta = require('../../models/Etiqueta');
 const PublicacionEtiqueta = require('../../models/PublicacionEtiqueta');
+
+function subirACloudinary(buffer, mimetype, carpeta) {
+  return new Promise((resolve, reject) => {
+    const tipoRecurso = mimetype.startsWith('video/') ? 'video' : 'image';
+
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: carpeta,
+        resource_type: tipoRecurso
+      },
+      (error, resultado) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(resultado);
+        }
+      }
+    );
+
+    stream.end(buffer);
+  });
+}
 
 async function formulario(req, res) {
   try {
@@ -71,30 +93,17 @@ async function guardar(req, res) {
     });
 
     for (const archivo of req.files) {
+      let bufferFinal = archivo.buffer;
       let rutaProtegida = null;
 
       if (
         copyrightActivo &&
         archivo.mimetype.startsWith('image/')
       ) {
-        const rutaOriginalFisica = archivo.path;
-
-        const nombreProtegido =
-          `protegida-${archivo.filename}`;
-
-        const rutaProtegidaFisica = path.join(
-          'public',
-          'uploads',
-          nombreProtegido
-        );
-
-        const rutaMarcaAgua = path.join(
-          __dirname,
-          '../../public/MarcaDeAgua/marcaDeAgua.png'
-        );
+        const rutaMarcaAgua = 'public/MarcaDeAgua/marcaDeAgua.png';
 
         const metadata =
-          await sharp(rutaOriginalFisica).metadata();
+          await sharp(archivo.buffer).metadata();
 
         const anchoMarcaAgua =
           Math.round(metadata.width * 0.45);
@@ -106,21 +115,41 @@ async function guardar(req, res) {
             })
             .toBuffer();
 
-        await sharp(rutaOriginalFisica)
-          .composite([
-            {
-              input: marcaAguaBuffer,
-              gravity: 'center'
-            }
-          ])
-          .toFile(rutaProtegidaFisica);
+        bufferFinal =
+          await sharp(archivo.buffer)
+            .composite([
+              {
+                input: marcaAguaBuffer,
+                gravity: 'center'
+              }
+            ])
+            .toBuffer();
+      }
 
-        rutaProtegida = nombreProtegido;
+      const resultadoCloudinary =
+        await subirACloudinary(
+          bufferFinal,
+          archivo.mimetype,
+          'fotaza'
+        );
+
+      const urlArchivo =
+        resultadoCloudinary.secure_url || resultadoCloudinary.url;
+
+      if (!urlArchivo) {
+        throw new Error('Cloudinary no devolvió URL del archivo');
+      }
+
+      if (
+        copyrightActivo &&
+        archivo.mimetype.startsWith('image/')
+      ) {
+        rutaProtegida = urlArchivo;
       }
 
       await Archivo.create({
         usuarioId: userId,
-        ruta: archivo.filename,
+        ruta: urlArchivo,
         tipo: archivo.mimetype,
         size: archivo.size,
         publicacionId: publicacion.id,
