@@ -101,7 +101,7 @@ async function nuevosSeguidores(req, res) {
 
       });
 
-    res.render( 'nuevosSeguidores', {
+    res.render( 'nuevoSeguidores', {
         notificaciones
       }
     );

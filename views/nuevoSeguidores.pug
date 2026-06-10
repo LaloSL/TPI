@@ -1,14 +1,20 @@
-h1 Nuevos seguidores
+extends layout.pug
 
-if notificaciones.length === 0
+block content
 
-    p No tenés notificaciones
+  h1 Nuevos seguidores
 
-else
+  if notificaciones && notificaciones.length === 0
+
+    p
+      | No tenés notificaciones
+
+  else
 
     each n in notificaciones
-        .card
 
-            p= n.mensaje
+      .card
 
-            small= new Date(n.createdAt).toLocaleString()
+        p= n.mensaje
+
+        small= new Date(n.createdAt).toLocaleString()

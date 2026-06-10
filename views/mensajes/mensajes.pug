@@ -1,4 +1,4 @@
-extends layout.pug
+extends ../layout.pug
 
 block content
 
@@ -42,9 +42,11 @@ block content
               .acciones-mensaje
 
                 a.btn(
-                  href=/mensajes/${mensaje.emisor.id}
+                  href=`/mensajes/${mensaje.emisor.id}`
                 )
                   | Responder mensaje
+
+            hr
 
       else
 
@@ -63,7 +65,7 @@ block content
         h2 Enviar mensaje
 
         form(
-          action=/mensajes/${otroUsuario.id}
+          action=`/mensajes/${otroUsuario.id}`
           method='POST'
         )
 

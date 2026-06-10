@@ -40,7 +40,7 @@ async function conversacion(req, res) {
       order: [['createdAt', 'ASC']]
     });
 
-    res.render('mensajes', {
+    res.render('mensajes/mensajes', {
       mensajes,
       otroUsuario,
       currentUser: {
@@ -99,7 +99,7 @@ async function recibidos(req, res) {
       order: [['createdAt', 'DESC']]
     });
 
-    res.render('mensajes', {
+    res.render('mensajes/mensajes', {
       mensajes,
       currentUser: {
         id: req.session.userId,

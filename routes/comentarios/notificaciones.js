@@ -10,6 +10,8 @@ router.get('/comentarios', requireAuth, notificacionesController.comentariosReci
 
 router.get('/valoraciones', requireAuth, notificacionesController.valoracionesRecibidas);
 
-router.get('/notificaciones', requireAuth, notificacionesController.verNotificaciones);
+router.get('/seguidores', requireAuth, notificacionesController.nuevosSeguidores);
+
+router.get('/', requireAuth, notificacionesController.verNotificaciones);
 
 module.exports = router;
