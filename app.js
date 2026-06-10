@@ -64,7 +64,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'clave_secreta_fotos',
+    secret: process.env.SESSION_SECRET || 'secretfotaza',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -105,6 +105,7 @@ app.use('/intereses', interesesRoutes);
 app.use('/interesados', interesadosRoutes);
 
 
+/* localhost:3000
 sequelize
   .sync()
   .then(() => {
@@ -117,7 +118,24 @@ sequelize
   })
   .catch((err) => {
     console.error('Error al sincronizar modelos:', err);
+  });*/
+//vercel
+  sequelize
+  .sync()
+  .then(() => {
+    console.log('Modelos sincronizados correctamente');
+  })
+  .catch((err) => {
+    console.error('Error al sincronizar modelos:', err);
   });
+
+if (require.main === module) {
+  app.listen(PORT, '::', () => {
+    console.log(`Servidor iniciado en http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
 
 
   //Dependecias
