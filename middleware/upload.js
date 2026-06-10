@@ -1,24 +1,7 @@
 const multer = require('multer');
-const path = require('path');
 
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage();
 
-  destination: function (req, file, cb) {
-
-    cb(null, 'public/uploads'); 
-  },
-
-
-  filename: function (req, file, cb) {
-    const extension = path.extname(file.originalname);
-    const nombreUnico =
-      Date.now() + '-' + Math.round(Math.random() * 1E9) + extension;
-    cb(null, nombreUnico);
-  }
-});
-
-
-// tipos de archivos permitidos
 const fileFilter = function (req, file, cb) {
   const tiposPermitidos = [
     'image/jpeg',
@@ -36,11 +19,9 @@ const fileFilter = function (req, file, cb) {
   }
 };
 
-
 const upload = multer({
   storage,
   fileFilter
 });
-
 
 module.exports = upload;
