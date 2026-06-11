@@ -34,7 +34,7 @@ block content
                 strong Imagen:
 
               img.valoracion-imagen(
-                src='/uploads/' + (valoracion.Archivo.rutaProtegida || valoracion.Archivo.ruta)
+                src=valoracion.Archivo.rutaProtegida || valoracion.Archivo.ruta
                 alt='Imagen valorada'
               )
 

@@ -27,7 +27,7 @@ block content
               if archivo.tipo && archivo.tipo.startsWith('image')
 
                 img(
-                  src=`/uploads/${archivo.rutaProtegida || archivo.ruta}`
+                  src=archivo.rutaProtegida || archivo.ruta
                   alt='Imagen de la publicación'
                   width='100%'
                 )
@@ -40,7 +40,7 @@ block content
                 )
 
                   source(
-                    src=`/uploads/${archivo.rutaProtegida || archivo.ruta}`
+                    src=archivo.ruta
                     type=archivo.tipo
                   )
 

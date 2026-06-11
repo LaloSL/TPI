@@ -47,14 +47,51 @@ async function formulario(req, res) {
 async function crear(req, res) {
   const usuario = req.body;
 
+  const nombre = usuario.nombre ? usuario.nombre.trim() : '';
+  const dni = usuario.dni ? usuario.dni.toString().trim() : '';
+  const email = usuario.email ? usuario.email.trim().toLowerCase() : '';
+  const password = usuario.password ? usuario.password.trim() : '';
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   if (
-    !usuario.nombre ||
-    !usuario.dni ||
-    !usuario.email ||
-    !usuario.password
+    !nombre ||
+    !dni ||
+    !email ||
+    !password
   ) {
     return res.status(400).render('usuarios/formulario', {
       error: 'Todos los campos son obligatorios'
+    });
+  }
+
+  if (nombre.length < 3) {
+    return res.status(400).render('usuarios/formulario', {
+      error: 'El nombre debe tener al menos 3 caracteres'
+    });
+  }
+
+  if (!/^\d+$/.test(dni)) {
+    return res.status(400).render('usuarios/formulario', {
+      error: 'El DNI solo debe contener números'
+    });
+  }
+
+  if (dni.length < 3) {
+    return res.status(400).render('usuarios/formulario', {
+      error: 'El DNI debe tener al menos 3 números'
+    });
+  }
+
+  if (!emailRegex.test(email)) {
+    return res.status(400).render('usuarios/formulario', {
+      error: 'El correo electrónico no es válido'
+    });
+  }
+
+  if (password.length < 6) {
+    return res.status(400).render('usuarios/formulario', {
+      error: 'La contraseña debe tener al menos 6 caracteres'
     });
   }
 
@@ -62,8 +99,8 @@ async function crear(req, res) {
     const usuarioExistente = await Usuario.findOne({
       where: {
         [Op.or]: [
-          { dni: usuario.dni },
-          { email: usuario.email }
+          { dni },
+          { email }
         ]
       }
     });
@@ -74,12 +111,12 @@ async function crear(req, res) {
       });
     }
 
-    const passwordHash = await bcrypt.hash(usuario.password, 10);
+    const passwordHash = await bcrypt.hash(password, 10);
 
     await Usuario.create({
-      nombre: usuario.nombre,
-      email: usuario.email,
-      dni: usuario.dni,
+      nombre,
+      email,
+      dni,
       password: passwordHash,
       rol: 'usuario',
       estado: 'activo'
