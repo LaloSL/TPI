@@ -25,7 +25,6 @@ require('./models/Coleccion');
 require('./models/ColeccionPublicacion');
 require('./models/Interes');
 require('./models/Mensaje');
-console.log('MODELOS CARGADOS:', Object.keys(sequelize.models));
 
 
 // Middleware
@@ -48,12 +47,13 @@ const modificarContraRoutes = require('./routes/eje/modificarContra');
 const recuperarRoutes = require('./routes/eje/recuperarContra');
 
 
+
 //publicaciones
 const subirRoutes = require('./routes/publicaciones/subirRoutes'); 
 const publicacionesRoutes = require('./routes/publicaciones/publicacionesRoutes');
 const etiquetasRoutes = require('./routes/publicaciones/etiquetas');
 const publicarEtiquetasRoutes = require('./routes/publicaciones/publicarEtiquetas');
-const moderacionRoutes = require('./routes/publicaciones/moderacion');
+const moderacionRoutes = require('./routes/moderacion/lista');
 
 //interacciones del sistema
 const likesRoutes = require('./routes/comentarios/like');
@@ -104,14 +104,15 @@ app.use('/seguidores', seguidoresRoutes);
 app.use('/recuperar', recuperarRoutes);
 app.use('/modiContra', modificarContraRoutes);
 
+
 //publicaciones
 app.use('/subir', subirRoutes);
 app.use('/publicaciones', publicacionesRoutes);
 app.use('/etiquetas', etiquetasRoutes);
 app.use('/publicarEtiquetas', publicarEtiquetasRoutes);
-app.use('/moderacion', moderacionRoutes);
 app.use('/colecciones', coleccionesRoutes);
 app.use('/mensajes', mensajesRoutes);
+app.use('/moderacion', moderacionRoutes);
 
 //interacciones del sistema
 app.use('/likes', likesRoutes);
