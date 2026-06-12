@@ -2,6 +2,20 @@ extends ../layout.pug
 
 block content
 
+  - function tiempoRelativo(fecha) {
+  -   const ahora = new Date();
+  -   const publicada = new Date(fecha);
+  -   const diferencia = ahora - publicada;
+  -   const minutos = Math.floor(diferencia / 60000);
+  -   const horas = Math.floor(minutos / 60);
+  -   const dias = Math.floor(horas / 24);
+  -   if (minutos < 1) return 'Recién';
+  -   if (minutos < 60) return `Hace ${minutos} min`;
+  -   if (horas < 24) return `Hace ${horas} h`;
+  -   if (dias < 7) return `Hace ${dias} día${dias > 1 ? 's' : ''}`;
+  -   return publicada.toLocaleDateString('es-AR');
+  - }
+
   h1 Usuarios interesados en mis publicaciones
 
   if intereses && intereses.length > 0
@@ -83,8 +97,8 @@ block content
         if interes.createdAt
 
           p
-            strong Fecha de interés:
-            |  #{interes.createdAt}
+            strong Interés:
+            |  #{tiempoRelativo(interes.createdAt)}
 
         if interes.usuarioInteresado
 

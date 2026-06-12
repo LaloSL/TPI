@@ -2,35 +2,44 @@ extends ../layout
 
 block content
 
-  if currentUser
-    h1 Registrar nuevo usuario
-  else
-    h1 Crear cuenta
+  .form-container
 
-  form(
-    action=currentUser ? '/usuarios/nuevo' : '/registro'
-    method='POST'
-  )
-    label Nombre:
-    input(type='text', name='nombre', required)
-    br
+    if currentUser
+      h1 Registrar nuevo usuario
+    else
+      h1 Crear cuenta
 
-    label Email:
-    input(type='email', name='email', required)
-    br
+    form.form-usuario(
+      action=currentUser ? '/usuarios/nuevo' : '/registro'
+      method='POST'
+    )
 
-    label DNI:
-    input(type='text', name='dni', required)
-    br
+      .campo-form
+        label(for='nombre') Nombre
+        input#nombre(type='text', name='nombre', required)
 
-    label Contraseña:
-    input(type='password', name='password', required)
-    br
+      .campo-form
+        label(for='email') Email
+        input#email(type='email', name='email', required)
 
-    button(type='submit') Registrar
+      .campo-form
+        label(for='dni') DNI
+        input#dni(type='text', name='dni', required)
 
-  if error
-    p(style='color: red;') #{error}
+      .campo-form
+        label(for='password') Contraseña
+        input#password(
+          type='password'
+          name='password'
+          required
+          minlength='6'
+          placeholder='Mínimo 6 caracteres'
+        )
 
-  if success
-    p(style='color: green;') #{success}
+      button.btn(type='submit') Registrar
+
+    if error
+      p.error #{error}
+
+    if success
+      p.success #{success}

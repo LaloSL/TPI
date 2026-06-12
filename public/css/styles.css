@@ -963,3 +963,28 @@ th {
         gap: 8px;
     }
 }
+
+/* crear cuenta */
+.form-container {
+  max-width: 700px;
+}
+
+.form-usuario {
+  margin-top: 20px;
+}
+
+.campo-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.campo-form label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.campo-form input {
+  width: 100%;
+  max-width: 620px;
+}

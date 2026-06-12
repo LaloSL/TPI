@@ -77,21 +77,41 @@ async function inicio(req, res) {
         estadoPublicacion: 'activa'
       },
       include: [
-        { model: Usuario },
+        {
+          model: Usuario
+        },
         {
           model: Archivo,
-          include: [{ model: Valoracion }]
-        },
-        { model: Like },
-        {
-          model: Comentario,
           include: [
-            { model: Usuario },
-            { model: DenunciaComentario }
+            {
+              model: Valoracion
+            }
           ]
         },
-        { model: Etiqueta },
-        { model: Denuncia }
+        {
+          model: Like
+        },
+        {
+          model: Comentario,
+          where: {
+            estadoComentario: 'activo'
+          },
+          required: false,
+          include: [
+            {
+              model: Usuario
+            },
+            {
+              model: DenunciaComentario
+            }
+          ]
+        },
+        {
+          model: Etiqueta
+        },
+        {
+          model: Denuncia
+        }
       ],
       order: [['id', 'DESC']]
     });

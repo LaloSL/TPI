@@ -24,11 +24,19 @@ block content
 
             p
               strong Motivo:
-              |  #{denuncia.motivo}
+              - const motivoLimpio = denuncia.motivo.replace(/_/g, ' ')
+              |  #{motivoLimpio.charAt(0).toUpperCase() + motivoLimpio.slice(1)}
 
             p
               strong Descripción:
               |  #{denuncia.descripcion}
+
+            form(
+              action='/denuncias-comentarios/eliminar/' + denuncia.Comentario.id,
+              method='POST'
+            )
+              button.btn-danger(type='submit')
+                | Eliminar comentario
 
       else
 
