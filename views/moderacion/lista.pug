@@ -40,19 +40,19 @@ block content
 
             if archivo.tipo && archivo.tipo.startsWith('image')
 
-              if archivo.tieneCopyright && archivo.rutaProtegida
+              img(
+                src=archivo.rutaProtegida || archivo.ruta
+                width='300'
+                alt='Archivo de la publicación'
+              )
 
-                img(
-                  src=`/uploads/${archivo.rutaProtegida}`
-                  width='300'
-                )
+            else if archivo.tipo && archivo.tipo.startsWith('video')
 
-              else
-
-                img(
-                  src=`/uploads/${archivo.ruta}`
-                  width='300'
-                )
+              video(
+                src=archivo.ruta
+                width='300'
+                controls
+              )
 
             br
             br
